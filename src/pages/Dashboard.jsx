@@ -1,10 +1,11 @@
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
+import { FaHome, FaUser, FaCog } from "react-icons/fa";
 
 const sidebarItems = [
-  { label: "Home", path: "/dashboard/home" },
-  { label: "Users", path: "/dashboard/users" },
-  { label: "Settings", path: "/dashboard/settings" },
+  { label: "Home", path: "/dashboard/home", icon: <FaHome /> },
+  { label: "Users", path: "/dashboard/users", icon: <FaUser /> },
+  { label: "Settings", path: "/dashboard/settings", icon: <FaCog /> },
 ];
 
 const Dashboard = () => {
