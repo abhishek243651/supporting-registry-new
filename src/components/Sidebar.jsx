@@ -13,7 +13,7 @@ const Sidebar = ({ items }) => {
       className={`bg-white text-dark p-3 d-flex flex-column border border-success`}
       style={{
         width: collapsed ? "70px" : "250px",
-        height: "100vh",
+        minHeight: "100vh",
         transition: "width 0.3s",
       }}
     >
@@ -43,7 +43,7 @@ const Sidebar = ({ items }) => {
           </h5>
         )}
         <button
-          className="btn btn-sm btn-outline-dark"
+          className="btn btn-sm btn-outline-success"
           onClick={() => setCollapsed(!collapsed)}
         >
           <FaBars />

@@ -182,7 +182,7 @@ const AddUsers = () => {
         <div className="d-flex justify-content-between mt-4">
           <button
             type="button"
-            className="btn btn-outline-secondary"
+            className="btn btn-outline-success"
             onClick={() => navigate(-1)}
           >
             &lt; Back
