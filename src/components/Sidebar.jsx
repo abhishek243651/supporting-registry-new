@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
+import logo from "../assets/images/agristacklogo.png";
+import { RxDashboard } from "react-icons/rx";
 
 const Sidebar = ({ items }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -8,17 +10,40 @@ const Sidebar = ({ items }) => {
 
   return (
     <div
-      className={`bg-dark text-white p-3 d-flex flex-column`}
+      className={`bg-white text-dark p-3 d-flex flex-column border border-success`}
       style={{
         width: collapsed ? "70px" : "250px",
         height: "100vh",
         transition: "width 0.3s",
       }}
     >
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        {!collapsed && <h5 className="mb-0">Dashboard</h5>}
+      <div
+        className="d-flex align-items-center justify-content-center mb-3 "
+        style={{
+          height: "50px",
+          borderBottom: "2px solid #28a745",
+        }}
+      >
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            width: collapsed ? "30px" : "150px",
+            height: "80px",
+            transition: "width 0.3s",
+            objectFit: "contain",
+          }}
+        />
+      </div>
+      <div className="d-flex justify-content-between align-items-center mb-2">
+        {!collapsed && (
+          <h5 className="d-flex align-items-center gap-2 mb-0 me-2">
+            <RxDashboard />
+            Dashboard
+          </h5>
+        )}
         <button
-          className="btn btn-sm btn-outline-light"
+          className="btn btn-sm btn-outline-dark"
           onClick={() => setCollapsed(!collapsed)}
         >
           <FaBars />
@@ -27,18 +52,21 @@ const Sidebar = ({ items }) => {
 
       <ul className="list-unstyled">
         {items.map((item, index) => (
-          <li
-            key={index}
-            className={`mb-2 ${
-              location.pathname === item.path ? "fw-bold" : ""
-            }`}
-          >
+          <li key={index} className="mb-2">
             <Link
               to={item.path}
-              className="text-white text-decoration-none d-flex align-items-center"
+              className={`text-decoration-none d-flex align-items-center w-100 rounded ${
+                location.pathname === item.path
+                  ? "text-white bg-success fw-bold"
+                  : "text-dark"
+              }`}
+              style={{
+                padding: collapsed ? "8px" : "8px 12px",
+                justifyContent: collapsed ? "center" : "flex-start",
+              }}
             >
-              <span className="me-2">{item.icon}</span>
-              {!collapsed && <span>{item.label}</span>}
+              <span className={collapsed ? "" : "me-3"}>{item.icon}</span>
+              {!collapsed && <span className="text-nowrap">{item.label}</span>}
             </Link>
           </li>
         ))}

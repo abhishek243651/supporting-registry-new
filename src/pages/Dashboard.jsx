@@ -1,19 +1,18 @@
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
-import { FaHome, FaUser, FaCog } from "react-icons/fa";
-
-const sidebarItems = [
-  { label: "Home", path: "/dashboard/home", icon: <FaHome /> },
-  { label: "Users", path: "/dashboard/users", icon: <FaUser /> },
-  { label: "Settings", path: "/dashboard/settings", icon: <FaCog /> },
-];
+import { FaHome, FaUser, FaCog, FaUsers } from "react-icons/fa";
+import Footer from "../components/Footer";
+import { sidebarItems } from "../utils/sidebar";
 
 const Dashboard = () => {
   return (
-    <div className="d-flex">
+    <div className="d-flex" style={{ minHeight: "100vh" }}>
       <Sidebar items={sidebarItems} />
-      <div className="flex-grow-1 p-4">
-        <Outlet />
+      <div className="flex-grow-1 d-flex flex-column w-100">
+        <main className="flex-grow-1">
+          <Outlet />
+        </main>
+        <Footer />
       </div>
     </div>
   );
