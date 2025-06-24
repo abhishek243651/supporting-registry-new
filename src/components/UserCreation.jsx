@@ -27,6 +27,11 @@ function UserCreation() {
         setSearchtxt(e.target.value)
     }
 
+    const EditHandling = (id) => {
+        // const user = userData.filter(user => user.id === id) 
+        navigate(`/dashboard/editusers/${id}`)
+    }
+
     const handleDelete = async (id) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this user?")
         if (!confirmDelete) return;
@@ -52,19 +57,19 @@ function UserCreation() {
                 <div><Dropdown /></div>
                 <div><Dropdown /></div>
                 <div><Dropdown /></div>
-                <div>
-                    <div><IoSearchOutline /></div>
-                    <div>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder='Search'
-                            style={{ minWidth: '200px' }}
-                            onChange={(e) => handleChange(e)}
-                            value={searchtxt}
-                        />
-                    </div>
+                <div className="input-group" style={{ maxWidth: '200px' }}>
+                    <span className="input-group-text bg-white border-end-0">
+                        <IoSearchOutline />
+                    </span>
+                    <input
+                        type="text"
+                        className="form-control "
+                        placeholder="Search"
+                        value={searchtxt}
+                        onChange={handleChange}
+                    />
                 </div>
+
                 <div>
                     <button type='button' className="btn btn-outline-secondary" style={{ minWidth: '200px' }} onClick={() => navigate('/dashboard/users')}><IoIosAddCircleOutline /> Add User</button>
                 </div>
@@ -94,7 +99,7 @@ function UserCreation() {
                                                 <span className="me-2 text-danger" style={{ cursor: 'pointer' }} onClick={() => handleDelete(item.id)}>
                                                     <CiTrash />
                                                 </span>
-                                                <span className="text-primary" style={{ cursor: 'pointer' }}>
+                                                <span className="text-primary" style={{ cursor: 'pointer' }} onClick={() => EditHandling(item.id)}>
                                                     <FaRegEdit />
                                                 </span>
                                             </td>

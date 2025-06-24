@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { validationSchema } from "../schema/AddUsersSchema";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddUsers = () => {
+  const { id } = useParams()
+
+  // const [editData, setEditData] = useState({})
+
+  // if (id) {
+  //   const loadData = async () => {
+  //     const user = await fetch(`https://dummyjson.com/users/${id}`)
+  //     const res = await user.json()
+  //     setEditData(res)
+  //   }
+
+  //   useEffect(() => {
+  //     loadData()
+  //   }, [])
+  // }
+
+
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -25,6 +42,29 @@ const AddUsers = () => {
       }, 500);
     },
   });
+
+  useEffect(() => {
+    if (!id) return;
+    const loadData = async () => {
+      try {
+        const res = await fetch(`https://dummyjson.com/users/${id}`);
+        const user = await res.json();
+        formik.setValues({
+          username: user.username || "",
+          email: user.email || "",
+          password_hash: "", // Never prefill passwords in real apps
+          first_name: user.firstName || "",
+          last_name: user.lastName || "",
+          role_id: 1, // dummyjson doesn't have role_id, set as default
+          is_active: true, // default
+          department: user.company?.department || ""
+        });
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      }
+    }
+    loadData()
+  }, [id])
 
   return (
     <div className="p-4">
